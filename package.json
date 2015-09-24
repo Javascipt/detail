@@ -1,0 +1,23 @@
+{
+  "name": "detail",
+  "version": "1.0.0",
+  "description": "Details and Markdown viewer of your node packages/projects",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Javascipt/detail.git"
+  },
+  "keywords": [
+    "Markdown",
+    "README",
+    "README.md",
+    "details",
+    "detail"
+  ],
+  "author": "Khalid REHIOUI <Array.prototype@gmail.com> (http://github.com/javascipt)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Javascipt/detail/issues"
+  },
+  "homepage": "https://github.com/Javascipt/detail#readme"
+}
