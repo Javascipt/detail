@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/Javascipt/detail/issues"
   },
-  "homepage": "https://github.com/Javascipt/detail#readme"
+  "homepage": "https://github.com/Javascipt/detail#readme",
+  "preferGlobal": true,
+  "bin" : {
+    "detail": "index.js"
+  }
 }
