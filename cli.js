@@ -1,3 +1,5 @@
+require("colors");
+
 module.exports = (function () {
   var cli = [];
   var defaultAction = null;
@@ -28,7 +30,7 @@ module.exports = (function () {
   }
   
   function error (message) {
-    console.log("error : %s", message);
+    console.log(("error : " + message).red);
   }
   
   return {
@@ -51,8 +53,9 @@ module.exports = (function () {
       
       return this;
     },
-    default : function (description, callback) {
+    default : function (usage, description, callback) {
       defaultAction = {
+        usage: usage,
         description: description,
         callback: callback
       }

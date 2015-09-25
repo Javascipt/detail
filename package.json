@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/Javascipt/detail#readme",
   "preferGlobal": true,
-  "bin" : {
+  "bin": {
     "detail": "index.js"
+  },
+  "dependencies": {
+    "colors": "^1.1.2"
   }
 }
