@@ -6,12 +6,20 @@ module.exports = (function () {
   function check (args, opts) {
     if(!opts.length) {
       if(defaultAction) {
-        return defaultAction.callback.apply(this, args);
+        try {
+          return defaultAction.callback.apply(this, args);
+        } catch (ex) {
+          return error(ex.message);
+        }
       } else {
         return error("No default callback specified");
       }
     } else if(opts.length>1) {
       return error("You need to pass only one option");
+    }
+    
+    if(args.length > 2) {
+      return error("Only two arguments needed");
     }
     
     var callback = cli.reduce(function (callback, item) {
@@ -23,7 +31,11 @@ module.exports = (function () {
     }, null);
     
     if(callback) {
-      callback.apply(this, args);
+      try {
+        callback.apply(this, args);
+      } catch (ex) {
+        return error(ex.message);
+      }
     } else {
       error("The option given is not valid");
     }
@@ -70,6 +82,7 @@ module.exports = (function () {
         ((arg.trim().indexOf('-')==0) ? opts : args ).push(arg.trim());
       });
       check(args, opts);
-    }
+    },
+    throw: error
   }
 })();
