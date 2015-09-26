@@ -6,9 +6,7 @@ module.exports = (function (marked) {
     return marked(markdown)
   }
   function generateDetails (data) {
-    if(data.author && data.author.name) {
-      data.author = data.author.name;
-    }
+    data.author = data.author && data.author.name;
     return {
       'name': data.name,
       'global': data.preferGlobal,
@@ -24,10 +22,10 @@ module.exports = (function (marked) {
     };
   }
   function generateMainPage (data, callback) {
-    var path = require("path");
-    var pathToTemplate = path.resolve(__dirname, '..', 'templates', require("../config.json").template, 'template.ejs');
-    var pathToMainPage = path.resolve(__dirname, '..', 'templates', require("../config.json").template, 'index.html');
-    var fs = require('fs');
+    var path            = require("path"),
+        pathToTemplate  = path.resolve(__dirname, '..', 'templates', require("../config.json").template, 'template.ejs'),
+        pathToMainPage  = path.resolve(__dirname, '..', 'templates', require("../config.json").template, 'index.html'),
+        fs              = require('fs');
     fs.readFile(pathToTemplate, function (err, template) {
       if(err) return callback(err);
       fs.writeFile(pathToMainPage, ejs.render(template.toString(), data), callback);
@@ -35,15 +33,14 @@ module.exports = (function (marked) {
   }
   return {
     generate: function (filesPaths, callback) {
-      var path = require("path");
-      var fs = require('fs');
-      var data = {};
+      var path = require("path"),
+          fs = require('fs');
       fs.readFile(filesPaths['README.md'], function (err, markdown) {
         if(err) return callback(err);
-        var pkgJson = require(path.resolve(filesPaths['package.json']));
-        data = generateDetails(pkgJson);
+        var pkgJson = require(path.resolve(filesPaths['package.json'])),
+            data    = generateDetails(pkgJson);
         data.readme = generateReadme(markdown.toString());
-        data.bug = pkgJson.bugs && pkgJson.bugs.url;
+        data.bug    = pkgJson.bugs && pkgJson.bugs.url;
         generateMainPage(data, callback);
       });
     }
