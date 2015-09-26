@@ -11,3 +11,7 @@ $(document).ready(function(){
 
   setContent('readme');
 });
+
+$(window).bind("beforeunload", function() { 
+    $.ajax({ url : "stop" });
+})

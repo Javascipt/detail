@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 
 var cli = require("./modules/cli");
+var generator = require("./modules/generator");
+var launcher = require("./modules/launcher");
+
 cli.when('-h, --help', 'Output usage information', cli.help)
    .when('-v, --version', 'OUtput version number', cli.version)
    .when('-m, --module', 'Get details of locally installed modules', function (pkgName) {
       if(arguments.length != 1) return cli.throw("You need to specify the name of only one global package");
       getFilesPaths(getPath(process.cwd(), pkgName), function (err, pathsToFiles) {
-        if(err) return this.throw(err.message); var generator = require("./modules/generator");
+        if(err) return this.throw(err.message);
         generator.generate(pathsToFiles, function (err) {
           if(err) return this.throw(err);
-          // @todo : call launcher here
+          launcher.launch(function (err) {
+            if(err) return this.throw(err);
+          }.bind(cli));
         })
       }.bind(cli));
    }).when('-g, --global', 'Get details of globally installed modules', function (pkgName) {
@@ -18,10 +23,12 @@ cli.when('-h, --help', 'Output usage information', cli.help)
       globals.get(function (err, globalPath) {
         if(err) return this.throw(err);
         getFilesPaths(getPath(globalPath, pkgName), function (err, pathsToFiles) {
-          if(err) return this.throw(err.message); var generator = require("./modules/generator");
+          if(err) return this.throw(err.message); 
           generator.generate(pathsToFiles, function (err) {
             if(err) return this.throw(err);
-            // @todo : call launcher here
+            launcher.launch(function (err) {
+              if(err) return this.throw(err);
+            }.bind(cli));
           })
         }.bind(cli));
       }.bind(cli));
@@ -29,10 +36,11 @@ cli.when('-h, --help', 'Output usage information', cli.help)
       dir = dir || process.cwd();
       getFilesPaths(getPath(dir, pkgName), function (err, pathsToFiles) {
         if(err) return this.throw(err.message);
-        var generator = require("./modules/generator");
         generator.generate(pathsToFiles, function (err) {
           if(err) return this.throw(err);
-          // @todo :call launcher here
+          launcher.launch(function (err) {
+            if(err) return this.throw(err);
+          }.bind(cli));
         })
       }.bind(cli));
    }).start(process.argv);
