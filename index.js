@@ -50,17 +50,20 @@ function getFilesPaths (dir, callback) {
       fs          = require('fs'),
       error       = new TypeError("This directory doesn't contain both README.md and package.json"),
       filesExist  = true,
-      filesPaths  = {
-        'README.md': path.join(dir, 'README.md'),
-        'package.json': path.join(dir, 'package.json')
-      };
+      filesPaths  = {},
+      readmeName  = '';
   
-  // @todo : sometimes the readme file can be named ReadMe.md !!
-  fs.exists(filesPaths['README.md'], function (readmeExists) {
-    if (!readmeExists) return callback(error);
-    fs.exists(filesPaths['package.json'], function (packageFileExists) {
-      callback(packageFileExists ? null : error, packageFileExists ? filesPaths : null);
-    });
+  !['readme.md', 'README.md', 'ReadMe.md', 'Readme.md'].some(function (name) {
+    return fs.existsSync(path.join(dir, readmeName = name));
+  }) && callback(error);
+    
+  filesPaths  = {
+    'README.md': path.join(dir, readmeName),
+    'package.json': path.join(dir, 'package.json')
+  };
+    
+  fs.exists(filesPaths['package.json'], function (packageFileExists) {
+    callback(packageFileExists ? null : error, packageFileExists ? filesPaths : null);
   });
 }
 
