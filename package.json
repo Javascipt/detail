@@ -25,6 +25,7 @@
     "detail": "index.js"
   },
   "dependencies": {
-    "colors": "^1.1.2"
+    "colors": "^1.1.2",
+    "marked": "^0.3.5"
   }
 }
