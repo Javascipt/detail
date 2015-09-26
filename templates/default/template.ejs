@@ -37,7 +37,9 @@
                     <li>
                         <a class="menu-btn" goto="#info" href="#">Infos</a>
                     </li>
-                    {{ @report }}
+                    <% if(bug) { %>
+                      <%- '<li><a class="menu-btn" target="_blank" href="' + bug + '">Report bug</a></li>' %>
+                    <% } %>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -54,14 +56,56 @@
 
                 <div class="panel panel-default">
                     <div class="panel-body">
-                      {{ @readme }}
+                      <%- readme -%>
                     </div>
                 </div>
 
 
             </div>
             <div id="info-id">
-              {{ @details }}
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Project Details</div>
+                <div class="panel-body">
+                  <table class="table table-stripped table-bordered">
+                    <tr>
+                       <td> Package name </td>
+                       <td> <%= name %><% if(global) { %> <span class="btn label label-default"> Global </span> <% } %> </td>
+                    </tr>
+                    <tr> <td> Description </td><td> <%= description %> </td> </tr>
+                    <tr> <td> Author </td> <td> <%= author %> </td> </tr>
+                    <tr> <td> Email </td> <td> <%= email %> </td> </tr>
+                    <tr> <td> Website </td> <td> <%= website %> </td> </tr>
+                    <tr> <td> Repository </td><td> <%= repo %> </td></tr>
+                  </table>
+                </div>
+                <!-- List group -->
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <b>Dependencies : </b>
+                    <% for(var key in dependencies) { %>
+                      <%- '<a href="http://npmjs.org/package/' + key + '" target="_blank">' %>
+                        <span class="btn label label-success">
+                          <%= key %> <%= dependencies[key] %>
+                        </span> 
+                      </a> &nbsp;
+                    <% } %>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Tags : </b>
+                    <% for (var i=0; i< tags.length; i++) {%>
+                      <span class="label label-info"> <%= tags[i] %> </span> &nbsp;
+                    <%}%>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Version : </b> <span class="label label-primary"><%= version %></span>
+                  </li>
+                  <li class="list-group-item">
+                    <b>License : </b>
+                    <span class="label label-warning"><%= license %></span>
+                  </li>
+                </ul>
+              </div>
             </div>
         </div>
 
