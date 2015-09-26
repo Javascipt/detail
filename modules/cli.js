@@ -48,7 +48,7 @@ module.exports = (function () {
   return {
     when : function (opt, description, callback) {
       cli.push({
-        options: opt.split(',').map(function (item) { return item.trim(); }),
+        options: opt.split(' ').filter(function (item) { return !!item; }),
         description: description,
         callback: callback
       });
@@ -56,12 +56,25 @@ module.exports = (function () {
       return this;
     },
     help: function () {
-      console.log("help");
-      
+      var columnify = require('columnify')
+      var data = [{' ':'', options : '', description : ''}].concat(cli.map(function (item) {
+        return {
+          ' ' : '',
+          options : item.options.join(' '),
+          description : item.description
+        }
+      }));
+      console.log('\n    Usage: ' + defaultAction.usage + '  \n\n\n', columnify(data,  {
+        minWidth: 30,
+        config: {
+          description: {maxWidth: 50},
+          ' ':{maxWidth : 2}
+        }
+      }));
       return this;
     },
     version: function () {
-      console.log("version");
+      console.log(require('../package.json').version);
       
       return this;
     },
