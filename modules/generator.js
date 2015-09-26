@@ -6,7 +6,7 @@ module.exports = (function (marked) {
     return marked(markdown)
   }
   function generateDetails (data) {
-    data.author = data.author && data.author.name;
+    data.author = (data.author && (data.author.name || data.author)) || '';
     return {
       'name': data.name,
       'global': data.preferGlobal,
