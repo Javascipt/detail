@@ -23,10 +23,10 @@ module.exports = (function () {
       freeport(function (err, port) {
         if(err) return callback(err);
         app.use('/', express.static(pathToMainPage))
-           .get('/stop', function (req, res) {
-             process.exit(0);
+           .get('/stop', process.exit)
+           .get('/running', function (req, res) {
+             res.json({});
            }).listen(port);
-        
         browse("http://localhost:" + port, callback);
       });
     }

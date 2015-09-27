@@ -10,6 +10,20 @@ $(document).ready(function(){
   });
 
   setContent('readme');
+  
+  function checkServer () {
+    $.ajax({
+      url : 'running',
+      success : function () {
+        setTimeout(checkServer, 1000);
+      },
+      error : function () {
+        window.close();
+      }
+    });
+  }
+  
+  checkServer();
 });
 
 $(window).bind("beforeunload", function() { 
