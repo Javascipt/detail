@@ -5,7 +5,7 @@ $(document).ready(function(){
 	((to=="#info") ? $("#readme-id") : $("#info-id")).fadeOut();
   }
 
-  $(".menu-btn").click(function () {
+  $(".menu-button").click(function () {
   	setContent($(this).attr('goto'));
   });
 
