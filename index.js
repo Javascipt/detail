@@ -53,7 +53,8 @@ function getFilesPaths (dir, callback) {
       filesPaths  = {},
       readmeName  = '';
   
-  !['readme.md', 'README.md', 'ReadMe.md', 'Readme.md'].some(function (name) {
+  // @todo : i need to find an optimized way
+  !['readme.md', 'README.md', 'ReadMe.md', 'Readme.md', 'readme.markdown', 'README.markdown', 'ReadMe.markdown', 'Readme.markdown'].some(function (name) {
     return fs.existsSync(path.join(dir, readmeName = name));
   }) && callback(error);
     
