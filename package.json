@@ -1,6 +1,6 @@
 {
   "name": "detail",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Details and Markdown viewer of your node packages/projects",
   "main": "index.js",
   "repository": {
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/Javascipt/detail#readme",
   "preferGlobal": true,
   "bin": {
-    "detail": "index.js"
+    "detail": "./index.js"
   },
   "dependencies": {
     "colors": "^1.1.2",
@@ -31,6 +31,6 @@
     "express": "^4.13.3",
     "freeport": "^1.0.5",
     "marked": "^0.3.5",
-    "suspect": "^1.0.0"
+    "suspect": "^1.0.1"
   }
 }

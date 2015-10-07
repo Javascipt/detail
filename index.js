@@ -15,7 +15,7 @@ cli.when('-h --help', 'Output usage information', cli.help)
           launcher.launch(function (err) {
             if(err) return this.throw(err);
           }.bind(cli));
-        })
+        }.bind(cli));
       }.bind(cli));
    }).when('-g --global <moduleName>', 'Get details of globally installed modules', function (pkgName) {
       if(arguments.length != 1) return cli.throw("You need to specify the name of only one global package");
@@ -29,7 +29,7 @@ cli.when('-h --help', 'Output usage information', cli.help)
             launcher.launch(function (err) {
               if(err) return this.throw(err);
             }.bind(cli));
-          })
+          }.bind(cli));
         }.bind(cli));
       }.bind(cli));
    }).default('detail [options|dir] [moduleName]', 'Launch details and markdown viewer of given project/package', function (dir, pkgName) {
@@ -41,7 +41,7 @@ cli.when('-h --help', 'Output usage information', cli.help)
           launcher.launch(function (err) {
             if(err) return this.throw(err);
           }.bind(cli));
-        })
+        }.bind(cli));
       }.bind(cli));
    }).start(process.argv);
 
