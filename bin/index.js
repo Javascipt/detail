@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-var cli = require("./modules/cli");
-var generator = require("./modules/generator");
-var launcher = require("./modules/launcher");
+var cli = require("../modules/cli");
+var generator = require("../modules/generator");
+var launcher = require("../modules/launcher");
 
 cli.when('-h --help', 'Output usage information', cli.help)
    .when('-v --version', 'Output version number', cli.version)
@@ -19,7 +19,7 @@ cli.when('-h --help', 'Output usage information', cli.help)
       }.bind(cli));
    }).when('-g --global <moduleName>', 'Get details of globally installed modules', function (pkgName) {
       if(arguments.length != 1) return cli.throw("You need to specify the name of only one global package");
-      var globals = require('./modules/globals');
+      var globals = require('../modules/globals');
       globals.get(function (err, globalPath) {
         if(err) return this.throw(err);
         getFilesPaths(getPath(globalPath, pkgName), function (err, pathsToFiles) {
