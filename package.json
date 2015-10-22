@@ -1,6 +1,6 @@
 {
   "name": "detail",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Details and Markdown viewer of your node packages/projects",
   "main": "index.js",
   "repository": {
