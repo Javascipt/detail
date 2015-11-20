@@ -1,5 +1,7 @@
 # detail
 
+![Detail](https://travis-ci.org/Javascipt/detail.svg)
+
 The detail command allows you to get information about a nodejs package or project on a web page browsed using your default web browser.
 
 ### Installation
